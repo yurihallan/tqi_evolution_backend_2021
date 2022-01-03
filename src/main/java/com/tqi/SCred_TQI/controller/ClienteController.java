@@ -1,7 +1,9 @@
 package com.tqi.SCred_TQI.controller;
 
 import com.tqi.SCred_TQI.entity.Cliente;
+import com.tqi.SCred_TQI.entity.Endereco;
 import com.tqi.SCred_TQI.repository.ClienteRepository;
+import com.tqi.SCred_TQI.repository.EnderecoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +21,14 @@ public class ClienteController {
 
     private ClienteRepository clienteRepository;
 
+
     //metodo Get - Listando Todos os clientes
     @RequestMapping(value = "/cliente", method = RequestMethod.GET)
     public List<Cliente> listAllClient(){
         return  clienteRepository.findAll();
     }
 
-    //metodo Get - Listando um clientes pelo id
+    //metodo Get - Listando um cliente pelo id
     @RequestMapping(value = "/cliente/{id}",method = RequestMethod.GET)
     public Cliente findClientById(@PathVariable Long id){
           Optional<Cliente> clientOptional = clienteRepository.findById(id);
@@ -56,6 +59,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> changeClient(@PathVariable Long id, @RequestBody Cliente NewClient){
             Optional<Cliente> oldClient = clienteRepository.findById(id);
 
+
             if(oldClient.isPresent()){
                 Cliente cliente = oldClient.get();
                 cliente.setNome(NewClient.getNome());
@@ -63,7 +67,10 @@ public class ClienteController {
                 cliente.setRG(NewClient.getRG());
                 cliente.setCPF(NewClient.getCPF());
                 cliente.setSenha(NewClient.getSenha());
-                cliente.setEnderecos(NewClient.getEnderecos());
+                cliente.setRenda(NewClient.getRenda());
+
+
+
                 return new ResponseEntity<>(cliente, HttpStatus.OK);
             }else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -8,35 +8,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class Endereco {
+
+public class Emprestimo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
     @NotNull
-    private String rua;
+    private Integer valor_emprestimo;
     @NotNull
-    private String bairro;
+    private LocalDate data_primeira_parcela;
     @NotNull
-    private  String cidade;
+    private int  qtd_parcelas;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cliente",referencedColumnName = "id")
     private Cliente cliente;
 
-
-    public Endereco(String rua, String bairro, String cidade, Cliente cliente) {
-        this.rua = rua;
-        this.bairro = bairro;
-        this.cidade = cidade;
+    public Emprestimo(Integer valor_emprestimo, LocalDate data_primeira_parcela, int qtd_parcelas, Cliente cliente) {
+        this.valor_emprestimo = valor_emprestimo;
+        this.data_primeira_parcela = data_primeira_parcela;
+        this.qtd_parcelas = qtd_parcelas;
         this.cliente = cliente;
+    }
+
+    public Emprestimo() {
     }
 }

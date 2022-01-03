@@ -1,12 +1,14 @@
 package com.tqi.SCred_TQI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.annotations.Type;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Data
@@ -33,6 +35,19 @@ public class Cliente {
     private Integer renda;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Endereco> enderecos;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Emprestimo> emprestimoList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    public Cliente(String nome, String email, String CPF, String RG, String senha, Integer renda) {
+        this.nome = nome;
+        this.email = email;
+        this.CPF = CPF;
+        this.RG = RG;
+        this.senha = senha;
+        this.renda = renda;
+
+    }
 }
