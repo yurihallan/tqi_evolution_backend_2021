@@ -23,19 +23,26 @@ public class SCredTqiApplication {
 			SpringApplication.run(SCredTqiApplication.class, args);
 		ClienteRepository clienteRepository = configurableApplicationContext.getBean(ClienteRepository.class);
 
+
 		//String nome, String email, String CPF, String RG,
 		// String senha, Integer renda, List<Endereco> enderecos
-//		Cliente cliente = new Cliente("teste" dereco1,endereco2);
-
-//		Long valor_emprestimo, LocalDate data_primeira_parcela, int qtd_parcelas, Cliente cliente
-//		Emprestimo emprestimo1 = new Emprestimo(2000,LocalDate.now(),5,cliente);
-//		Emprestimo emprestimo2 = new Emprestimo(2500,LocalDate.now(),10,cliente);
-//		List<Emprestimo> emprestimos = Arrays.asList(emprestimo1,emprestimo2);
+//		Cliente cliente = new Cliente("Gabriel", "gabriel@gamil","1234564845","789456231","123adsw",12315);
+//
+//
+//		//		String rua, String bairro, String cidade, Cliente cliente
+//		Endereco endereco1 = new Endereco("rua test12", "Maoa", "SP", cliente);
+//		Endereco endereco2 = new Endereco("rua test55", "São jorge", "RJ", cliente);
+//		List<Endereco> enderecos = Arrays.asList(endereco1);
+//
+//		//		Long valor_emprestimo, LocalDate data_primeira_parcela, int qtd_parcelas, Cliente cliente
+//		Emprestimo emprestimo1 = new Emprestimo(4000,LocalDate.now().plusMonths(4),40,cliente);
+//		Emprestimo emprestimo2 = new Emprestimo(6500,LocalDate.now(),18,cliente);
+//		List<Emprestimo> emprestimos = Arrays.asList(emprestimo1);
 //
 //		cliente.setEnderecos(enderecos);
 //		cliente.setEmprestimoList(emprestimos);
 //		clienteRepository.save(cliente);
-//		clienteRepository.findAll();
+
 
 	}
 

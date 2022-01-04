@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,8 +37,10 @@ public class EmprestimoController {
     //Metodo Post - Cadastrando um emprestimo
     @RequestMapping(value = "/emprestimo", method = RequestMethod.POST)
     public ResponseEntity<Emprestimo> CreateLoan(@RequestBody Emprestimo emprestimo){
-        if(emprestimo.getQtd_parcelas() <= 60){
+        LocalDate data_primeira_parcela = emprestimo.getData_primeira_parcela();
+        LocalDate data_tres_meses = LocalDate.now().plusMonths(3);
 
+        if((emprestimo.getQtd_parcelas() <= 60) && (data_primeira_parcela.compareTo(data_tres_meses) <= 0)){
             return new ResponseEntity<>(emprestimoRepository.save(emprestimo), HttpStatus.OK);
         }else {
             System.out.println("Emprestimo excedeu o limite permitido!");
@@ -51,9 +54,9 @@ public class EmprestimoController {
         Optional<Emprestimo> emprestimoOptional = emprestimoRepository.findById(id);
         if(emprestimoOptional.isPresent()){
             emprestimoRepository.deleteById(id);
-            return  new ResponseEntity<Emprestimo>(HttpStatus.NO_CONTENT);
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {
-            return  new ResponseEntity<Emprestimo>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

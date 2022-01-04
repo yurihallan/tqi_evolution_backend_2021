@@ -1,9 +1,9 @@
 package com.tqi.SCred_TQI.controller;
 
 import com.tqi.SCred_TQI.entity.Cliente;
-import com.tqi.SCred_TQI.entity.Endereco;
+import com.tqi.SCred_TQI.exception.ClientNotFoundException;
 import com.tqi.SCred_TQI.repository.ClienteRepository;
-import com.tqi.SCred_TQI.repository.EnderecoRepository;
+import com.tqi.SCred_TQI.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ClienteController {
 
     private ClienteRepository clienteRepository;
+    private ClientService clientService;
 
 
     //metodo Get - Listando Todos os clientes
@@ -39,6 +40,8 @@ public class ClienteController {
     //metodo Post - Cadastrando um cliente com seu endereço
     @RequestMapping(value = "/cliente", method = RequestMethod.POST)
     public Cliente createClient(@RequestBody Cliente cliente){
+
+
         return clienteRepository.save(cliente);
     }
 
@@ -56,27 +59,15 @@ public class ClienteController {
 
     //metodo Put -Alterando um clientes e seu endereço
     @RequestMapping(value = "/cliente/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Cliente> changeClient(@PathVariable Long id, @RequestBody Cliente NewClient){
-            Optional<Cliente> oldClient = clienteRepository.findById(id);
+    public ResponseEntity<Cliente> changeClient(@PathVariable Long id, @RequestBody Cliente NewClient) {
+           return clientService.changeClient(id, NewClient);
+    }
 
+    //Metodo Get -Listando um cliente e verificando seu email e a senha.
+    @RequestMapping(value = "/cliente/UserLogin/",method = RequestMethod.GET)
+    public Cliente UserLogin(@RequestBody Cliente clienteLogin) throws ClientNotFoundException {
 
-            if(oldClient.isPresent()){
-                Cliente cliente = oldClient.get();
-                cliente.setNome(NewClient.getNome());
-                cliente.setEmail(NewClient.getEmail());
-                cliente.setRG(NewClient.getRG());
-                cliente.setCPF(NewClient.getCPF());
-                cliente.setSenha(NewClient.getSenha());
-                cliente.setRenda(NewClient.getRenda());
-
-
-
-                return new ResponseEntity<>(cliente, HttpStatus.OK);
-            }else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-
+        return clientService.UserLogin(clienteLogin);
     }
 
 }
