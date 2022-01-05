@@ -43,4 +43,24 @@ public class ClientService {
             return new ResponseEntity<>(new ClientNotFoundException("Cliente não foi encontrado!"),HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<Object> deleteClient(@PathVariable Long id){
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        if(clienteOptional.isPresent()){
+            clienteRepository.deleteById(id);
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<Object> findClientById(@PathVariable Long id){
+        Optional<Cliente> clientOptional = clienteRepository.findById(id);
+
+        try {
+            return new ResponseEntity<>(clientOptional.get(),HttpStatus.OK);
+        } catch (Exception e) {
+            return  new ResponseEntity<>(new ClientNotFoundException("Cliente não foi encontrado!"),HttpStatus.NOT_FOUND);
+        }
+    }
 }

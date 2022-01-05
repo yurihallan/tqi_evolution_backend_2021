@@ -31,16 +31,14 @@ public class ClienteController {
 
     //metodo Get - Listando um cliente pelo id
     @RequestMapping(value = "/cliente/{id}",method = RequestMethod.GET)
-    public Cliente findClientById(@PathVariable Long id){
-          Optional<Cliente> clientOptional = clienteRepository.findById(id);
+    public ResponseEntity<Object> findClientById(@PathVariable Long id){
 
-          return clientOptional.orElseThrow(() -> new NoResultException("Client Not Found"));
+          return clientService.findClientById(id);
     }
 
     //metodo Post - Cadastrando um cliente com seu endereço
     @RequestMapping(value = "/cliente", method = RequestMethod.POST)
     public Cliente createClient(@RequestBody Cliente cliente){
-
 
         return clienteRepository.save(cliente);
     }
@@ -48,19 +46,13 @@ public class ClienteController {
     //metodo Delete - Deletando um cliente
     @RequestMapping(value = "/cliente/{id}",method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteClient(@PathVariable Long id){
-        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        if(clienteOptional.isPresent()){
-            clienteRepository.deleteById(id);
-            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else {
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return clientService.deleteClient(id);
     }
 
     //metodo Put -Alterando um clientes e seu endereço
     @RequestMapping(value = "/cliente/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Cliente> changeClient(@PathVariable Long id, @RequestBody Cliente NewClient) {
-           return clientService.changeClient(id, NewClient);
+        return clientService.changeClient(id, NewClient);
     }
 
     //Metodo Get -Listando um cliente e verificando seu email e a senha.
