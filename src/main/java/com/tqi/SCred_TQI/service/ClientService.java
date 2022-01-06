@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,17 +51,26 @@ public class ClientService {
             clienteRepository.deleteById(id);
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return  new ResponseEntity<>(new ClientNotFoundException("Cliente não foi encontrado!"),HttpStatus.NOT_FOUND);
         }
     }
 
     public ResponseEntity<Object> findClientById(@PathVariable Long id){
         Optional<Cliente> clientOptional = clienteRepository.findById(id);
 
-        try {
+        if(clientOptional.isPresent()){
             return new ResponseEntity<>(clientOptional.get(),HttpStatus.OK);
-        } catch (Exception e) {
+        }else {
             return  new ResponseEntity<>(new ClientNotFoundException("Cliente não foi encontrado!"),HttpStatus.NOT_FOUND);
         }
+
+    }
+
+    public List<Cliente> listAllClient(){
+        return clienteRepository.findAll();
+    }
+
+    public Cliente createClient(@RequestBody Cliente cliente){
+        return clienteRepository.save(cliente);
     }
 }
