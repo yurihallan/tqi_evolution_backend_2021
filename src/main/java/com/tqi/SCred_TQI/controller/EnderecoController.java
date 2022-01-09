@@ -1,18 +1,16 @@
 package com.tqi.SCred_TQI.controller;
 
+import com.tqi.SCred_TQI.DTO.request.EnderecoDTO;
 import com.tqi.SCred_TQI.entity.Endereco;
 import com.tqi.SCred_TQI.exception.AddressNotFoundException;
-import com.tqi.SCred_TQI.repository.EnderecoRepository;
 import com.tqi.SCred_TQI.service.EnderecoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.NoResultException;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/scred")
@@ -36,8 +34,8 @@ public class EnderecoController {
 
     //metodo Post - Cadastrando um endereço com seu endereço
     @RequestMapping(value = "/endereco", method = RequestMethod.POST)
-    public Endereco createAddress(@RequestBody Endereco endereco) {
-        return enderecoService.createAddress(endereco);
+    public Endereco createAddress(@RequestBody @Valid EnderecoDTO enderecoDTO) {
+        return enderecoService.createAddress(enderecoDTO);
     }
 
     //metodo Delete - Deletando um endereço
@@ -49,7 +47,7 @@ public class EnderecoController {
 
     //metodo Put - Alterando um endereço do cliente
     @RequestMapping(value = "/endereco/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Endereco> changeAddress(@PathVariable Long id, @RequestBody Endereco NewEndereco){
+    public ResponseEntity<Endereco> changeAddress(@PathVariable Long id, @RequestBody @Valid Endereco NewEndereco){
         return enderecoService.changeAddress(id, NewEndereco);
     }
 

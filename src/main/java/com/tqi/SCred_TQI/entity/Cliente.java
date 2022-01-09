@@ -35,10 +35,10 @@ public class Cliente {
     private Integer renda;
 
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Emprestimo> emprestimoList = new ArrayList<>();
+    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Emprestimo> emprestimos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Cliente(String nome, String email, String CPF, String RG, String senha, Integer renda) {

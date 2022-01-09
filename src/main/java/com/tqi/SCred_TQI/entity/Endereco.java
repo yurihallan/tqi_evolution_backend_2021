@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -27,16 +28,16 @@ public class Endereco {
     @NotNull
     private  String cidade;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "cliente",referencedColumnName = "id")
-    private Cliente cliente;
+    @Type(type = "jsonb")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente clientes;
 
 
-    public Endereco(String rua, String bairro, String cidade, Cliente cliente) {
+    public Endereco(String rua, String bairro, String cidade, Cliente clientes) {
         this.rua = rua;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.cliente = cliente;
+        this.clientes = clientes;
     }
 }
