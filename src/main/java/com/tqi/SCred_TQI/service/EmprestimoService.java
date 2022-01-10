@@ -19,8 +19,8 @@ import java.util.Optional;
 public class EmprestimoService {
     private EmprestimoRepository emprestimoRepository;
 
-    public List<Emprestimo> listAllLoan(){
-        return emprestimoRepository.findAll();
+    public List<Object> listAllLoan(){
+        return emprestimoRepository.FindAllEmprestimo();
     }
 
     public Emprestimo findLoanById(@PathVariable Long id) throws LoanNotFoundException {

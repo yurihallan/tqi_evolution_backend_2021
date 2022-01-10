@@ -19,7 +19,7 @@ public class EmprestimoController {
 
     //metodo Get - Listando todos os emprestimo;
     @RequestMapping(value = "/emprestimo", method = RequestMethod.GET)
-    public List<Emprestimo> listAllLoan(){
+    public List<Object> listAllLoan(){
         return emprestimoService.listAllLoan();
     }
 
@@ -47,5 +47,7 @@ public class EmprestimoController {
     public ResponseEntity ChangeLoan(@PathVariable Long id, @RequestBody Emprestimo EmprestimoNew) {
        return emprestimoService.ChangeLoan(id, EmprestimoNew);
     }
+
+
 
 }

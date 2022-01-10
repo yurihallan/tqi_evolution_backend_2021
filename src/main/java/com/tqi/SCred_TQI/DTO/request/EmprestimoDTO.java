@@ -19,8 +19,7 @@ public class EmprestimoDTO {
 
     @NotEmpty
     private Integer valor_emprestimo;
-    @NotEmpty
-    private LocalDate data_primeira_parcela;
+
     @NotEmpty
     private int  qtd_parcelas;
 }
