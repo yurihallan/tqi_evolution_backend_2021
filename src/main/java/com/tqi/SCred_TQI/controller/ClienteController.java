@@ -38,10 +38,10 @@ public class ClienteController {
     //metodo Post - Cadastrando um cliente com seu endereço
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/cliente", method = RequestMethod.POST)
-    public MessageResponseDTO createClient(@RequestBody @Valid ClienteDTO clienteDTO){
+    public MessageResponseDTO createClient(@RequestBody @Valid Cliente cliente){
 
-//        return clientService.createClient(clienteDTO);
-        return null;
+        return clientService.createClient(cliente);
+
     }
 
     //metodo Delete - Deletando um cliente

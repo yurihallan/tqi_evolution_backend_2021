@@ -12,15 +12,6 @@ public class EmprestimoUtils {
     public static final int EMPRESTIMO_QTD_PARCELAS = 20;
 
 
-    public static EmprestimoDTO createFakeDTO(){
-        return EmprestimoDTO.builder()
-                .id(EMPRESTIMO_ID)
-                .valor_emprestimo(VALOR_EMPRESTIMO)
-                .data_primeira_parcela(EMPRESTIMO_DATA_PRIMEIRO_PARCELA)
-                .qtd_parcelas(EMPRESTIMO_QTD_PARCELAS)
-                .build();
-    }
-
     public static Emprestimo createFakeEntity(){
         return Emprestimo.builder()
                 .id(EMPRESTIMO_ID)

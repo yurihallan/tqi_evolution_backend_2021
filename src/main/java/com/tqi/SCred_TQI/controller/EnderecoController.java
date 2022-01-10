@@ -35,7 +35,8 @@ public class EnderecoController {
     //metodo Post - Cadastrando um endereço com seu endereço
     @RequestMapping(value = "/endereco", method = RequestMethod.POST)
     public Endereco createAddress(@RequestBody @Valid EnderecoDTO enderecoDTO) {
-        return enderecoService.createAddress(enderecoDTO);
+//        return enderecoService.createAddress(enderecoDTO);
+        return null;
     }
 
     //metodo Delete - Deletando um endereço

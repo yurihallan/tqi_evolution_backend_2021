@@ -15,19 +15,6 @@ public class ClienteUtils {
     public static final String CLIENT_SENHA = "13245";
     public static final Integer CLIENT_RENDA = 2500;
 
-    public static ClienteDTO createFakeDTO(){
-        return ClienteDTO.builder()
-                .id(CLIENT_ID)
-                .nome(CLIENT_NOME)
-                .email(CLIENT_EMAIL)
-                .RG(CLIENT_RG)
-                .senha(CLIENT_SENHA)
-                .renda(CLIENT_RENDA)
-                .CPF(CLIENT_CPF)
-                .enderecos(Collections.singletonList(EnderecoUtils.createFakeDTO()))
-                .emprestimos(Collections.singletonList(EmprestimoUtils.createFakeDTO()))
-                .build();
-    }
 
     public static Cliente createFakeEntity(){
         return Cliente.builder()

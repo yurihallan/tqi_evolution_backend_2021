@@ -1,19 +1,14 @@
 package com.tqi.SCred_TQI.service;
 
-import com.tqi.SCred_TQI.DTO.request.EnderecoDTO;
 import com.tqi.SCred_TQI.entity.Endereco;
 import com.tqi.SCred_TQI.exception.AddressNotFoundException;
-import com.tqi.SCred_TQI.mapper.EnderecoMapper;
 import com.tqi.SCred_TQI.repository.EnderecoRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +29,12 @@ public class EnderecoService {
         return enderecoOptional.orElseThrow(() -> new AddressNotFoundException("Endereco não foi encontrado!"));
     }
 
-    public Endereco createAddress(@RequestBody EnderecoDTO enderecoDTO){
-        Endereco enderecoToSave = EnderecoMapper.INSTANCE.toModel(enderecoDTO);
-
-        return enderecoRepository.save(enderecoToSave);
-
-    }
+//    public Endereco createAddress(@RequestBody EnderecoDTO enderecoDTO){
+//        Endereco enderecoToSave = EnderecoMapper.INSTANCE.toModel(enderecoDTO);
+//
+//        return enderecoRepository.save(enderecoToSave);
+//
+//    }
 
     public ResponseEntity<Object> deleteAddress(@PathVariable Long id){
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
@@ -51,7 +46,7 @@ public class EnderecoService {
         }
     }
 
-    public ResponseEntity<Endereco> changeAddress(@PathVariable Long id, @Valid Endereco NewEndereco){
+    public ResponseEntity<Endereco> changeAddress(Long id, Endereco NewEndereco){
         Optional<Endereco> oldAddress = enderecoRepository.findById(id);
 
         if(oldAddress.isPresent()){
@@ -59,7 +54,7 @@ public class EnderecoService {
             endereco.setCidade(NewEndereco.getCidade());
             endereco.setBairro(NewEndereco.getBairro());
             endereco.setRua(NewEndereco.getRua());
-            endereco.setClientes(NewEndereco.getClientes());
+
 
             return new ResponseEntity<>(endereco, HttpStatus.OK);
         }else {

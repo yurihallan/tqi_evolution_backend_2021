@@ -3,23 +3,15 @@ package com.tqi.SCred_TQI.service;
 import com.tqi.SCred_TQI.DTO.request.ClienteDTO;
 import com.tqi.SCred_TQI.DTO.response.MessageResponseDTO;
 import com.tqi.SCred_TQI.entity.Cliente;
-
 import com.tqi.SCred_TQI.exception.ClientNotFoundException;
 import com.tqi.SCred_TQI.exception.LoanNotFoundException;
-import com.tqi.SCred_TQI.mapper.ClienteMapper;
 import com.tqi.SCred_TQI.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
@@ -76,14 +68,15 @@ public class ClientService {
     }
 
     public List<Cliente> listAllClient() {
-        return clienteRepository.findAll();
+        List<Cliente> allCliente = clienteRepository.findAll();
+        return allCliente;
     }
 
-    public MessageResponseDTO createClient( ClienteDTO clienteDTO) {
-        Cliente clienteToSave = ClienteMapper.INSTANCE.toModel(clienteDTO);
+    public MessageResponseDTO createClient( Cliente cliente) {
+        Cliente saveCliente = clienteRepository.save(cliente);
 
-        Cliente saveCliente = clienteRepository.save(clienteToSave);
-        return createMessageResponse(saveCliente.getId(), "Cliente criado com sucesso!");
+        MessageResponseDTO messageResponse = createMessageResponse(saveCliente.getId(), "Cliente cadastrado com sucesso! -> id:");
+        return messageResponse;
 
     }
 

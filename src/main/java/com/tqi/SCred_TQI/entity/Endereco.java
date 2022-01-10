@@ -1,5 +1,6 @@
 package com.tqi.SCred_TQI.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,16 +29,12 @@ public class Endereco {
     @NotNull
     private  String cidade;
 
-    @Type(type = "jsonb")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente clientes;
 
 
-    public Endereco(String rua, String bairro, String cidade, Cliente clientes) {
+    public Endereco(String rua, String bairro, String cidade) {
         this.rua = rua;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.clientes = clientes;
+
     }
 }

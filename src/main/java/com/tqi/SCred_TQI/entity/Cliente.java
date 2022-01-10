@@ -36,11 +36,11 @@ public class Cliente {
     private Integer renda;
 
 
-    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Emprestimo> emprestimos = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Emprestimo> emprestimos;
 
-    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Endereco> enderecos;
 
     public Cliente(String nome, String email, String CPF, String RG, String senha, Integer renda) {
         this.nome = nome;

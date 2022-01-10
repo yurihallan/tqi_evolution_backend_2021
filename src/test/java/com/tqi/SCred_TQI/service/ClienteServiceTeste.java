@@ -26,16 +26,16 @@ public class ClienteServiceTeste {
 
     @Test
     void testGivenClientDTOthenRetunClient(){
-        ClienteDTO clienteDTO = ClienteUtils.createFakeDTO();
+
         Cliente SavedCliente = ClienteUtils.createFakeEntity();
 
         Mockito.when(clienteRepository.save(any(Cliente.class))).thenReturn(SavedCliente);
 
         MessageResponseDTO expectedSuccessMessage = MessageResponseDTO.builder()
-                .message("Cliente criado com sucesso!" + SavedCliente.getId())
+                .message("Cliente cadastrado com sucesso! -> id:" + SavedCliente.getId())
                 .build();
 
-        MessageResponseDTO successMessage = clientService.createClient(clienteDTO);
+        MessageResponseDTO successMessage = clientService.createClient(SavedCliente);
 
 
         assertEquals(expectedSuccessMessage, successMessage);

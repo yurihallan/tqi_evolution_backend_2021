@@ -10,14 +10,7 @@ public class EnderecoUtils {
     private static final String ENDERECO_CIDADE = "Manaus";
     public static final long ENDERECO_ID  = 1L;
 
-    public static EnderecoDTO createFakeDTO(){
-        return EnderecoDTO.builder()
-                .id(ENDERECO_ID)
-                .rua(ENDERECO_RUA)
-                .bairro(ENDERECO_BAIRRO)
-                .cidade(ENDERECO_CIDADE)
-                .build();
-    }
+
 
 
     public static Endereco createFakeEntity(){

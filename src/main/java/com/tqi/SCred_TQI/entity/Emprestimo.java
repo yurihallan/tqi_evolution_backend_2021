@@ -1,13 +1,14 @@
 package com.tqi.SCred_TQI.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 
@@ -15,8 +16,6 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
-@Getter
-@Setter
 public class Emprestimo {
 
     @Id
@@ -31,16 +30,13 @@ public class Emprestimo {
     @NotNull
     private int  qtd_parcelas;
 
-    @JsonDeserialize
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
-    private Cliente clientes;
 
-    public Emprestimo(Integer valor_emprestimo, LocalDate data_primeira_parcela, int qtd_parcelas, Cliente clientes) {
+
+    public Emprestimo(Integer valor_emprestimo, LocalDate data_primeira_parcela, int qtd_parcelas) {
         this.valor_emprestimo = valor_emprestimo;
         this.data_primeira_parcela = data_primeira_parcela;
         this.qtd_parcelas = qtd_parcelas;
-        this.clientes = clientes;
+
     }
 
     public Emprestimo() {
