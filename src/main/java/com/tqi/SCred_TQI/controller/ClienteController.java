@@ -6,7 +6,6 @@ import com.tqi.SCred_TQI.entity.Cliente;
 import com.tqi.SCred_TQI.exception.ClientNotFoundException;
 import com.tqi.SCred_TQI.service.ClientService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +45,7 @@ public class ClienteController {
 
     //metodo Delete - Deletando um cliente
     @RequestMapping(value = "/cliente/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteClient(@PathVariable Long id){
+    public ResponseEntity deleteClient(@PathVariable Long id){
         return clientService.deleteClient(id);
     }
 

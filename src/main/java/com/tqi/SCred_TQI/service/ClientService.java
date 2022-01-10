@@ -82,7 +82,7 @@ public class ClientService {
 
 
     public ResponseEntity GetLoanDetail( Long id) {
-        Optional<Object> emprestimoOptional = clienteRepository.LoanDetail(id);
+        Optional<Cliente> emprestimoOptional = clienteRepository.LoanDetail(id);
 
         if (emprestimoOptional.isPresent()) {
             return new ResponseEntity(emprestimoOptional, HttpStatus.OK);
