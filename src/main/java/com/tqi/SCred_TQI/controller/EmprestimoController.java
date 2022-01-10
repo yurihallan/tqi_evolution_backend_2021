@@ -2,23 +2,17 @@ package com.tqi.SCred_TQI.controller;
 
 import com.tqi.SCred_TQI.entity.Emprestimo;
 import com.tqi.SCred_TQI.exception.LoanNotFoundException;
-import com.tqi.SCred_TQI.repository.EmprestimoRepository;
 import com.tqi.SCred_TQI.service.EmprestimoService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.NoResultException;
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/scred")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
 public class EmprestimoController {
 
     private EmprestimoService emprestimoService;
@@ -38,7 +32,7 @@ public class EmprestimoController {
 
     //Metodo Post - Cadastrando um emprestimo
     @RequestMapping(value = "/emprestimo", method = RequestMethod.POST)
-    public ResponseEntity<Emprestimo> CreateLoan(@Valid @RequestBody Emprestimo NewEmprestimo){
+    public ResponseEntity CreateLoan(@Valid @RequestBody Emprestimo NewEmprestimo){
         return emprestimoService.CreateLoan(NewEmprestimo);
     }
 

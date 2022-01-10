@@ -23,19 +23,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
-public class ClienteService {
+@AllArgsConstructor
+public class ClientService {
 
     private ClienteRepository clienteRepository;
-    private final ClienteMapper clienteMapper = ClienteMapper.INSTANCE;
 
-    public Cliente UserLogin(@RequestBody Cliente clienteLogin) throws ClientNotFoundException {
+
+    public Cliente UserLogin( Cliente clienteLogin) throws ClientNotFoundException {
         Optional<Cliente> clienteOptional = clienteRepository.GetLogin(clienteLogin.getEmail(), clienteLogin.getSenha());
 
         return clienteOptional.orElseThrow(() -> new ClientNotFoundException("Cliente não foi encontrado!"));
     }
 
-    public ResponseEntity changeClient(@PathVariable Long id, @RequestBody Cliente NewClient) {
+    public ResponseEntity changeClient( Long id, Cliente NewClient) {
         Optional<Cliente> oldClient = clienteRepository.findById(id);
 
         if (oldClient.isPresent()) {
@@ -54,7 +54,7 @@ public class ClienteService {
         }
     }
 
-    public ResponseEntity<Object> deleteClient(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteClient( Long id) {
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
         if (clienteOptional.isPresent()) {
             clienteRepository.deleteById(id);
@@ -64,13 +64,13 @@ public class ClienteService {
         }
     }
 
-    public ResponseEntity<Object> findClientById(@PathVariable Long id) {
+    public ResponseEntity<ClienteDTO> findClientById( Long id) {
         Optional<Cliente> clientOptional = clienteRepository.findById(id);
 
         if (clientOptional.isPresent()) {
-            return new ResponseEntity<>(clientOptional.get(), HttpStatus.OK);
+            return new ResponseEntity(clientOptional.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ClientNotFoundException("Cliente não foi encontrado!"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new ClientNotFoundException("Cliente não foi encontrado!"), HttpStatus.NOT_FOUND);
         }
 
     }
@@ -79,8 +79,8 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public MessageResponseDTO createClient(@RequestBody ClienteDTO clienteDTO) {
-        Cliente clienteToSave = clienteMapper.toModel(clienteDTO);
+    public MessageResponseDTO createClient( ClienteDTO clienteDTO) {
+        Cliente clienteToSave = ClienteMapper.INSTANCE.toModel(clienteDTO);
 
         Cliente saveCliente = clienteRepository.save(clienteToSave);
         return createMessageResponse(saveCliente.getId(), "Cliente criado com sucesso!");
@@ -88,7 +88,7 @@ public class ClienteService {
     }
 
 
-    public ResponseEntity GetLoanDetail(@PathVariable Long id) {
+    public ResponseEntity GetLoanDetail( Long id) {
         Optional<Object> emprestimoOptional = clienteRepository.LoanDetail(id);
 
         if (emprestimoOptional.isPresent()) {

@@ -6,6 +6,7 @@ import com.tqi.SCred_TQI.exception.AddressNotFoundException;
 import com.tqi.SCred_TQI.mapper.EnderecoMapper;
 import com.tqi.SCred_TQI.repository.EnderecoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class EnderecoService {
 
     private EnderecoRepository enderecoRepository;
-    private final EnderecoMapper enderecoMapper = EnderecoMapper.INSTANCE;
+
 
     public List<Endereco> listAllAddress(){
         return enderecoRepository.findAll();
@@ -34,9 +35,10 @@ public class EnderecoService {
     }
 
     public Endereco createAddress(@RequestBody EnderecoDTO enderecoDTO){
-        Endereco enderecoToSave = enderecoMapper.toModel(enderecoDTO);
+        Endereco enderecoToSave = EnderecoMapper.INSTANCE.toModel(enderecoDTO);
 
         return enderecoRepository.save(enderecoToSave);
+
     }
 
     public ResponseEntity<Object> deleteAddress(@PathVariable Long id){

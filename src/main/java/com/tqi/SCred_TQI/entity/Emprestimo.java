@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -17,7 +15,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
-
+@Getter
+@Setter
 public class Emprestimo {
 
     @Id

@@ -3,6 +3,7 @@ package com.tqi.SCred_TQI.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 import javax.persistence.*;

@@ -29,15 +29,14 @@ public class EmprestimoService {
         return emprestimoOptional.orElseThrow(() -> new LoanNotFoundException("Loan Not Found"));
     }
 
-    public ResponseEntity CreateLoan(@RequestBody Emprestimo NewEmprestimo){
+    public ResponseEntity CreateLoan( @RequestBody Emprestimo NewEmprestimo){
         LocalDate data_primeira_parcela = NewEmprestimo.getData_primeira_parcela();
         LocalDate data_tres_meses = LocalDate.now().plusMonths(3);
 
-        if((NewEmprestimo.getQtd_parcelas() <= 60) && (data_primeira_parcela.compareTo(data_tres_meses) <= 0)){
+        if((NewEmprestimo.getQtd_parcelas() <= 60) && (data_primeira_parcela.compareTo(data_tres_meses) <= 0)) {
             return new ResponseEntity(emprestimoRepository.save(NewEmprestimo), HttpStatus.OK);
-        }else {
-
-            return new ResponseEntity(new LoanNotFoundException("Emprestimo excedeu o limite permitido!"),HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            return new ResponseEntity(new LoanNotFoundException("Emprestimo excedeu o limite permitido!"), HttpStatus.NOT_ACCEPTABLE);
         }
     }
 

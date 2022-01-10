@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/scred")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
 public class EnderecoController {
 
     private EnderecoService enderecoService;

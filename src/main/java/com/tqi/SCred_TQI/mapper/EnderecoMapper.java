@@ -3,15 +3,15 @@ package com.tqi.SCred_TQI.mapper;
 import com.tqi.SCred_TQI.DTO.request.EnderecoDTO;
 import com.tqi.SCred_TQI.entity.Endereco;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
-public interface EnderecoMapper {
+@Mapper(componentModel = "spring")
+public abstract class EnderecoMapper {
 
-    EnderecoMapper INSTANCE = Mappers.getMapper(EnderecoMapper.class);
+    public static final EnderecoMapper INSTANCE = Mappers.getMapper(EnderecoMapper.class);
 
+    public abstract Endereco toModel(EnderecoDTO enderecoDTO);
 
-    Endereco toModel(EnderecoDTO enderecoDTO);
-
-    EnderecoDTO toDTO(Endereco endereco);
+    public abstract EnderecoDTO toDTO(Endereco endereco);
 }

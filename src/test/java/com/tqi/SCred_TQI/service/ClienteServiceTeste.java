@@ -22,7 +22,7 @@ public class ClienteServiceTeste {
     private ClienteRepository clienteRepository;
 
     @InjectMocks
-    private ClienteService clientService;
+    private ClientService clientService;
 
     @Test
     void testGivenClientDTOthenRetunClient(){
